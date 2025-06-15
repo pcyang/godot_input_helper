@@ -212,6 +212,9 @@ func get_label_for_input(input: InputEvent) -> String:
 
 	if input is InputEventKey:
 		if input.physical_keycode > 0 :
+            if input.physical_keycode >= 4194436 and input.physical_keycode <= 4194447:
+                # Special case for numpad keys
+                return OS.get_keycode_string(input.physical_keycode)
 			var keycode: Key = DisplayServer.keyboard_get_keycode_from_physical(input.physical_keycode) if DisplayServer.keyboard_get_current_layout() > -1 else input.physical_keycode
 			return OS.get_keycode_string(keycode)
 		elif input.keycode > 0:
